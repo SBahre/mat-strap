@@ -1,0 +1,14 @@
+.master-list {
+  ::ng-deep.mdc-checkbox {
+    display: none !important;
+  }
+}
+.current-list {
+  ::ng-deep.mdc-checkbox {
+    display: none !important;
+  }
+}
+
+mat-list-option[aria-selected="true"] {
+  background: rgba(172, 180, 242, 0.7);
+}

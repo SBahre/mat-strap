@@ -1,0 +1,70 @@
+<!-- <mat-toolbar color="primary">
+  Fast, infinite scroll list
+</mat-toolbar> -->
+<div class="container-fluid">
+  <mat-card class="mat-elevation-z8" color="primary">
+    <mat-card-content>
+      <cdk-virtual-scroll-viewport #scroller itemSize="68" class="content">
+        <mat-list>
+          <ng-container *cdkVirtualFor="let item of newList">
+            <mat-list-item>{{item}}</mat-list-item>
+
+          </ng-container>
+        </mat-list>
+      </cdk-virtual-scroll-viewport>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+<!-- <cdk-virtual-scroll-viewport #scroller itemSize="108" class="content">
+  <mat-list>
+    <ng-container *cdkVirtualFor="let item of listItems">
+      <mat-list-item>
+        <h3 matLine> {{item.title}} </h3>
+        <p matLine>
+          <span> {{item.content}} </span>
+        </p>
+        <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+          <mat-icon>
+            more_vert
+          </mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </ng-container>
+    <div class="spinner-item" *ngIf="loading">
+      <mat-progress-spinner [mode]="'indeterminate'" [diameter]="50"></mat-progress-spinner>
+    </div>
+  </mat-list>
+</cdk-virtual-scroll-viewport> -->
+
+<!-- <mat-list class="content" #scroller>
+  <ng-container *ngFor="let item of listItems">
+    <mat-list-item>
+      <img matListAvatar [src]="item.image">
+      <h3 matLine> {{item.title}} </h3>
+      <p matLine>
+        <span> {{item.content}} </span>
+      </p>
+      <button mat-icon-button [matMenuTriggerFor]="itemMenu">
+        <mat-icon>
+          more_vert
+        </mat-icon>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </ng-container>
+</mat-list> -->
+
+<!-- <mat-menu #itemMenu="matMenu">
+  <button mat-menu-item>
+    Option 1
+  </button>
+  <button mat-menu-item>
+    Option 2
+  </button>
+  <button mat-menu-item>
+    Option 3
+  </button>
+</mat-menu> -->

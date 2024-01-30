@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-card.mat-elevation-z8 {
+  @include mat.elevation(8);
+}
+
+.mat-mdc-card.mat-elevation-z10 {
+  @include mat.elevation(10);
+}

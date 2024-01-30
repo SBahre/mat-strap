@@ -1,0 +1,62 @@
+<div>
+  <div class="row p-3">
+    <mat-card>
+      <mat-card-content>
+        Project Inputs
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row p-5">
+    <div class="col p-5">
+      <mat-card>
+        <mat-card-header>
+          Master List
+        </mat-card-header>
+        <hr>
+
+        <mat-card-content>
+          <mat-selection-list #master class="master-list">
+            <mat-list-option *ngFor="let indicator of masterList" (click)="addToMasterMoveList(indicator)">
+              {{indicator}}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col d-flex flex-column justify-content-center align-items-center">
+      <div class="mb-3">
+        <button mat-mini-fab color="primary" (click)="onForwardClick()" [disabled]="movefromMasterList.length<1">
+          <mat-icon>keyboard_arrow_right</mat-icon> </button>
+      </div>
+      <div>
+        <button mat-mini-fab color="primary" (click)="onBackwardClick()"
+          [disabled]="movefromSelectedList.length<1"><mat-icon>keyboard_arrow_left</mat-icon></button>
+      </div>
+    </div>
+    <div class="col p-5">
+      <mat-card>
+        <mat-card-header>
+          Selected Indicators:{{movefromSelectedList.length}}
+          <button mat-mini-fab color="primary" [disabled]="(currentList.length<2 || movefromSelectedList.length>1)"
+            (click)="onMoveup()">
+            <mat-icon>arrow_upward</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="ms-2"
+            [disabled]="(currentList.length<2 || movefromSelectedList.length>1)" (click)="onMoveDown()">
+            <mat-icon>arrow_downward</mat-icon>
+          </button>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+          <mat-selection-list #selectedIndics class="current-list">
+            <mat-list-option *ngFor="let indic of currentList" (click)="addToSelectedMoveList(indic)"
+              class="current-list-option">
+              {{indic}}
+              <mat-checkbox id="show-checkbox" style="display: block;"></mat-checkbox>
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="output">
+  <!-- <p>Form Data: {{userTable.value | json}}</p>
+  <p>Is Valid: {{userTable.valid}}</p> -->
+</div>
+<form [formGroup]="userForm">
+  <!-- <mat-form-field>
+    <mat-label>Data Source</mat-label>
+    <input type="text" placeholder="Select" matInput formControlName="dataSourceField"
+      [matAutocomplete]="templateDataSource">
+    <mat-autocomplete #templateDataSource="matAutocomplete" [displayWith]="displayFn">
+      <mat-option>Select</mat-option>
+      <mat-option *ngFor="let dataSourceItem of filteredOptions | async" [value]="dataSourceItem">
+        {{dataSourceItem.description}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->
+  <!-- {{userForm.controls['dataSourceField'].value}} -->
+
+  <mat-form-field appearance="outline" class="p-2 w-100">
+    <mat-label>Site Code</mat-label>
+    <input type="text" placeholder="Site Code" aria-label="sitecode" matInput formControlName="siteCode"
+      [matAutocomplete]="siteAutoComplete" #autoCompleteInput="matAutocompleteTrigger">
+    <mat-autocomplete #siteAutoComplete="matAutocomplete" [displayWith]="displaySiteCodeFn"
+      (optionSelected)='onSiteSelected($event.option.value)'>
+      <mat-option>Select site</mat-option>
+      <mat-option *ngFor="let psmd of filteredPsmds" [value]="psmd">
+        {{psmd.code}}
+      </mat-option>
+    </mat-autocomplete>
+    <button *ngIf="userForm.controls['siteCode'].value" matSuffix mat-icon-button aria-label="Clear"
+      (click)="onClearClick()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="userForm.controls['siteCode'].errors?.['requireMatch']">Value need match available
+      options</mat-error>
+
+  </mat-form-field>
+</form>
+{{this.userForm.controls['siteCode'].errors?.['requireMatch']}}
+<!-- <form>
+  <mat-form-field class="example-chip-list">
+    <mat-label>Favorite Fruits</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Fruit selection">
+      <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+        {{fruit}}
+        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl" [matChipInputFor]="chipGrid"
+      [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form> -->
