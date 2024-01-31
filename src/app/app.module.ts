@@ -53,6 +53,8 @@ import { EditableTableComponent } from './pages/editable-table/editable-table.co
 import { GenerateTreeComponent } from './pages/generate-tree/generate-tree.component';
 import { NumberCheckerPipe } from './pipes/number-checker.pipe';
 import { InlineEditableTableComponent } from './pages/inline-editable-table/inline-editable-table.component';
+import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,7 @@ import { InlineEditableTableComponent } from './pages/inline-editable-table/inli
     EditableTableComponent,
     NumberCheckerPipe,
     InlineEditableTableComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +113,7 @@ import { InlineEditableTableComponent } from './pages/inline-editable-table/inli
     AngularSplitModule,
     FormsModule,
     MatSlideToggleModule,
+    MatDialogModule,
   ],
   providers: [JsonPipe],
   bootstrap: [AppComponent],

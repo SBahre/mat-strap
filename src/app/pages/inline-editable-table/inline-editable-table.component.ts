@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 const USER_DATA = [
   {
@@ -31,11 +33,22 @@ const USER_DATA = [
   },
 ];
 /**
- *  key: name of the property which provides the data for the column
-    type: datatype of the columns
-    label: Header row text for the column,
+ * Order of the object of the COLUMNS_SCHEMA is the order in which columns
+ * appear in table
+ *
+ * key: unique name of the property which provides the data for the column
+ * type: datatype of the columns
+ * label: Header row text for the column,
+ *
+ *
+ *
  */
 const COLUMNS_SCHEMA = [
+  {
+    key: 'isSelected',
+    type: 'isSelected',
+    label: '',
+  },
   {
     key: 'name', //
     type: 'text',
@@ -68,12 +81,16 @@ const COLUMNS_SCHEMA = [
   templateUrl: './inline-editable-table.component.html',
   styleUrls: ['./inline-editable-table.component.scss'],
 })
-export class InlineEditableTableComponent {
+export class InlineEditableTableComponent implements OnInit {
   //displayedColumns: string[] = ['name', 'occupation', 'age'];
   /**This makes displayed columns dynamic */
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   dataSource: any = USER_DATA;
   columnsSchema: any = COLUMNS_SCHEMA;
+
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit(): void {}
 
   addRow() {
     const newRow = {
@@ -90,4 +107,32 @@ export class InlineEditableTableComponent {
   removeRow(id: number) {
     this.dataSource = this.dataSource.filter((u: any) => u.id !== id);
   }
+
+  //#region For header checkbox
+  isAllSelected() {
+    return this.dataSource.every((item: any) => item.isSelected);
+  }
+
+  isAnySelected() {
+    return this.dataSource.some((item: any) => item.isSelected);
+  }
+
+  selectAll(event: any) {
+    this.dataSource = this.dataSource.map((item: any) => ({
+      ...item,
+      isSelected: event.checked,
+    }));
+  }
+
+  removeSelectedRows() {
+    this.dialog
+      .open(ConfirmDialogComponent)
+      .afterClosed()
+      .subscribe((confirm) => {
+        if (confirm) {
+          this.dataSource = this.dataSource.filter((u: any) => !u.isSelected);
+        }
+      });
+  }
+  //#endregion
 }
