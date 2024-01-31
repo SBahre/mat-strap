@@ -52,6 +52,7 @@ import { CustomValidatorComponent } from './pages/custom-validator/custom-valida
 import { EditableTableComponent } from './pages/editable-table/editable-table.component';
 import { GenerateTreeComponent } from './pages/generate-tree/generate-tree.component';
 import { NumberCheckerPipe } from './pipes/number-checker.pipe';
+import { InlineEditableTableComponent } from './pages/inline-editable-table/inline-editable-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { NumberCheckerPipe } from './pipes/number-checker.pipe';
     GenerateTreeComponent,
     EditableTableComponent,
     NumberCheckerPipe,
+    InlineEditableTableComponent,
   ],
   imports: [
     CommonModule,
