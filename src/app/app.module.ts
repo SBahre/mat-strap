@@ -55,6 +55,7 @@ import { NumberCheckerPipe } from './pipes/number-checker.pipe';
 import { InlineEditableTableComponent } from './pages/inline-editable-table/inline-editable-table.component';
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ApiEditableTableComponent } from './pages/api-editable-table/api-editable-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +74,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     NumberCheckerPipe,
     InlineEditableTableComponent,
     ConfirmDialogComponent,
+    ApiEditableTableComponent,
   ],
   imports: [
     CommonModule,

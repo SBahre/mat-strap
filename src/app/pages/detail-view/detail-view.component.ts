@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 
-export interface User {
+export interface IUser {
   name: string;
   email: string;
   phoneNumber: number;
