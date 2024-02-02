@@ -59,19 +59,35 @@ export class ApiEditableTableComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private userService: UserService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    /**Observable way */
     this.userService.getUsers().subscribe((res: any) => {
       this.dataSource.data = res;
     });
+    /**Promise way */
+    this.dataSource.data = await this.userService.getUsersAsync();
   }
-  editRow(row: User) {
+
+  async editRow(row: User) {
+    /**Observable way */
+
+    // if (row.id === 0) {
+    //   this.userService.addUser(row).subscribe((newUser: User) => {
+    //     row.id = newUser.id;
+    //     row.isEdit = false;
+    //   });
+    // } else {
+    //   this.userService.updateUser(row).subscribe(() => (row.isEdit = false));
+    // }
+
+    /**Promise way */
     if (row.id === 0) {
-      this.userService.addUser(row).subscribe((newUser: User) => {
-        row.id = newUser.id;
-        row.isEdit = false;
-      });
+      let newUser = await this.userService.addUserAsync(row);
+      row.id = newUser.id;
+      row.isEdit = false;
     } else {
-      this.userService.updateUser(row).subscribe(() => (row.isEdit = false));
+      await this.userService.updateUserAsync(row);
+      row.isEdit = false;
     }
   }
 
@@ -88,42 +104,60 @@ export class ApiEditableTableComponent implements OnInit {
     this.dataSource.data = [newRow, ...this.dataSource.data];
   }
 
-  removeRow(id: number) {
-    this.userService.deleteUser(id).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(
-        (u: User) => u.id !== id
-      );
-    });
+  async removeRow(id: number) {
+    /**Observable way */
+
+    // this.userService.deleteUser(id).subscribe(() => {
+    //   this.dataSource.data = this.dataSource.data.filter(
+    //     (u: User) => u.id !== id
+    //   );
+    // });
+    /**Promise way */
+    await this.userService.deleteUserAsync(id);
+    this.dataSource.data = this.dataSource.data.filter(
+      (u: User) => u.id !== id
+    );
+    this.dataSource.data = [...this.dataSource.data];
   }
 
   //#region For header checkbox
   isAllSelected() {
-    //return this.dataSource.every((item: any) => item.isSelected);
+    return this.dataSource.data.every((item: any) => item.isSelected);
   }
 
   isAnySelected() {
-    //return this.dataSource.some((item: any) => item.isSelected);
+    return this.dataSource.data.some((item: any) => item.isSelected);
   }
 
   selectAll(event: any) {
-    // this.dataSource = this.dataSource.map((item: any) => ({
-    //   ...item,
-    //   isSelected: event.checked,
-    // }));
+    this.dataSource.data = this.dataSource.data.map((item: any) => ({
+      ...item,
+      isSelected: event.checked,
+    }));
   }
 
-  removeSelectedRows() {
+  async removeSelectedRows() {
     const users = this.dataSource.data.filter((u: User) => u.isSelected);
     this.dialog
       .open(ConfirmDialogComponent)
       .afterClosed()
-      .subscribe((confirm) => {
+      .subscribe(async (confirm) => {
         if (confirm) {
-          this.userService.deleteUsers(users).subscribe(() => {
+          /**Observable way */
+
+          // this.userService.deleteUsers(users).subscribe(() => {
+          //   this.dataSource.data = this.dataSource.data.filter(
+          //     (u: User) => !u.isSelected
+          //   );
+          // });
+
+          /**Promise way */
+          for await (const user of users) {
+            await this.userService.deleteUserAsync(user.id);
             this.dataSource.data = this.dataSource.data.filter(
               (u: User) => !u.isSelected
             );
-          });
+          }
         }
       });
   }
