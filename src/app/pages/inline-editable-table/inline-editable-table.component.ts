@@ -117,6 +117,10 @@ export class InlineEditableTableComponent implements OnInit {
     return this.dataSource.some((item: any) => item.isSelected);
   }
 
+  /**
+   * Updates the isSelected property of all items in the dataSource array.
+   * @param event - The event object containing the checked state.
+   */
   selectAll(event: any) {
     this.dataSource = this.dataSource.map((item: any) => ({
       ...item,
@@ -124,12 +128,18 @@ export class InlineEditableTableComponent implements OnInit {
     }));
   }
 
+  /**
+   * Removes the selected rows from the data source.
+   */
   removeSelectedRows() {
+    // Open a confirmation dialog
     this.dialog
       .open(ConfirmDialogComponent)
       .afterClosed()
       .subscribe((confirm) => {
+        // If the user confirms the deletion
         if (confirm) {
+          // Filter out the selected rows from the data source
           this.dataSource = this.dataSource.filter((u: any) => !u.isSelected);
         }
       });

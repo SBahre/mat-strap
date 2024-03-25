@@ -52,7 +52,7 @@ export class AppComponent {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  dob: string = '07/08/1991';
   constructor(private service: MasterService) {
     this.service.getCustomer().subscribe((res) => {
       this.customerList = res.customer;

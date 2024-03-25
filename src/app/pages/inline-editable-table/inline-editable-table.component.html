@@ -21,7 +21,9 @@
           </mat-checkbox>
         </ng-container>
         <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="element.isEdit = !element.isEdit">Edit</button>
+          <button mat-button (click)="element.isEdit = !element.isEdit">
+            Edit
+          </button>
           <button mat-button class="button-remove" (click)="removeRow(element.id)">
             Delete
           </button>

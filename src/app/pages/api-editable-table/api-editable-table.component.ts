@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 export interface User {
   isSelected: boolean;
@@ -31,6 +32,11 @@ export const UserColumns = [
     label: 'Last Name',
   },
   {
+    key: 'gender',
+    type: 'select',
+    label: 'Gender',
+  },
+  {
     key: 'email',
     type: 'email',
     label: 'Email',
@@ -56,16 +62,23 @@ export class ApiEditableTableComponent implements OnInit {
   displayedColumns: string[] = UserColumns.map((col) => col.key);
   columnsSchema: any = UserColumns;
   dataSource = new MatTableDataSource<User>();
+  resultsLength: number = 0;
+
+  pageEvent!: PageEvent;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public dialog: MatDialog, private userService: UserService) {}
 
   async ngOnInit() {
     /**Observable way */
-    this.userService.getUsers().subscribe((res: any) => {
-      this.dataSource.data = res;
-    });
+    // this.userService.getUsers().subscribe((res: any) => {
+    //   this.dataSource.data = res;
+    // });
     /**Promise way */
     this.dataSource.data = await this.userService.getUsersAsync();
+    this.dataSource.paginator = this.paginator;
+
+    this.resultsLength = this.dataSource.data.length;
   }
 
   async editRow(row: User) {
@@ -162,4 +175,9 @@ export class ApiEditableTableComponent implements OnInit {
       });
   }
   //#endregion
+
+  onPageChange(event: PageEvent): any {
+    console.log('PageIndex: ', event.pageIndex);
+    console.log('PageSize: ', event.pageSize);
+  }
 }
