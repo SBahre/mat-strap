@@ -1,0 +1,9 @@
+<span *ngFor="let field of fields">{{field.name}}, </span>
+<div
+  *ngFor="let item of rows |async |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize)">
+  {{item}}
+
+</div>
+<mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+  (page)="onNavigation($event)">
+</mat-paginator>

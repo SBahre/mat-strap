@@ -4,10 +4,10 @@
   </button>
   <button class="button-add-row" mat-button (click)="addRow()">Add Row</button>
 </article>
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" class="w-75">
   <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
     <!-- Table Header -->
-    <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
+    <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key" class="col-1">
       <span *ngSwitchCase="'isSelected'">
         <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()"
           [indeterminate]="!isAllSelected() && isAnySelected()">

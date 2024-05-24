@@ -56,6 +56,7 @@ import { InlineEditableTableComponent } from './pages/inline-editable-table/inli
 import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiEditableTableComponent } from './pages/api-editable-table/api-editable-table.component';
+import { ReportPaginationComponent } from './pages/report-pagination/report-pagination.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +76,7 @@ import { ApiEditableTableComponent } from './pages/api-editable-table/api-editab
     InlineEditableTableComponent,
     ConfirmDialogComponent,
     ApiEditableTableComponent,
+    ReportPaginationComponent,
   ],
   imports: [
     CommonModule,
