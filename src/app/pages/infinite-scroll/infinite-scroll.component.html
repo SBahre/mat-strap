@@ -1,6 +1,55 @@
 <!-- <mat-toolbar color="primary">
   Fast, infinite scroll list
 </mat-toolbar> -->
+
+<div class="row">
+  <div class="col-6">
+    <div class="input-group flex-nowrap">
+      <mat-form-field appearance="outline" class="input-box flex-grow-1">
+        <mat-label>
+          Planned Start Date
+        </mat-label>
+        <input matInput [matDatepicker]="plannedStartPicker">
+        <mat-datepicker #plannedStartPicker></mat-datepicker>
+      </mat-form-field>
+      <div class="input-group-append">
+        <span class="input-group-text">
+          <mat-icon (click)="plannedStartPicker.open()" class="pointer">calendar_today</mat-icon>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+        aria-describedby="basic-addon2">
+      <span class="input-group-text" id="basic-addon2">example.com</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+        aria-describedby="basic-addon2">
+      <span class="input-group-text" id="basic-addon2">example.com</span>
+    </div>
+  </div>
+</div>
+
+<form class="example-form">
+  <mat-form-field class="w-100">
+    <mat-label>Telephone</mat-label>
+    <span matTextPrefix>+1 &nbsp;</span>
+    <input type="tel" matInput placeholder="555-555-1234">
+    <mat-icon matSuffix>mode_edit</mat-icon>
+  </mat-form-field>
+</form>
+
 <div class="container-fluid">
   <mat-card class="mat-elevation-z8" color="primary">
     <mat-card-content>
